@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cập Nhật Thông Tin Cá Nhân - Hộ Chiếu Học Tập Số</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldPassport: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <!-- Background Decorative Gradients -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/15 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/3 -right-40 w-[30rem] h-[30rem] bg-teal-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 left-1/3 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#059669_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+    </div>
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="cv.html" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white text-xl font-extrabold shadow-lg hover:scale-105 transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div>
+                    <h1 class="font-black text-sm sm:text-base tracking-tight text-white">CHỈNH SỬA THÔNG TIN CÁ NHÂN</h1>
+                    <p class="text-[11px] text-slate-400">Hộ chiếu học tập số &bull; Học sinh Trần Gia Bảo</p>
+                </div>
+            </div>
+
+            <a href="cv.html" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-700 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-xmark"></i> Hủy bỏ
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN FORM CONTAINER -->
+    <main class="relative z-10 flex-grow max-w-5xl w-full mx-auto px-4 sm:px-6 py-8 space-y-6">
+
+        <!-- TOP ACTION BANNER: SYNC VNEID -->
+        <div class="glass-panel rounded-3xl p-6 border border-emerald-500/40 shadow-xl bg-gradient-to-r from-emerald-950/80 via-slate-900 to-teal-950/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-red-600 to-amber-500 text-white flex items-center justify-center text-2xl font-black shrink-0 shadow-lg">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="text-base font-bold text-white">Đồng bộ tự động từ CSDL Quốc gia</h3>
+                        <span class="bg-red-500/20 text-red-400 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-red-500/30">VNeID Định danh</span>
+                    </div>
+                    <p class="text-xs text-slate-300 mt-0.5">Xác thực tài khoản VNeID để tự động cập nhật chính xác Họ tên, Ngày sinh, Mã định danh và Thông tin phụ huynh.</p>
+                </div>
+            </div>
+
+            <button type="button" onclick="openVneidModal()" class="w-full md:w-auto bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-xs px-5 py-3 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 shrink-0">
+                <i class="fa-solid fa-rotate text-sm"></i> Đồng bộ từ CSDL Quốc gia (VNeID)
+            </button>
+        </div>
+
+        <!-- FORM CHỈNH SỬA THÔNG TIN -->
+        <form id="personalForm" onsubmit="savePersonalData(event)" class="space-y-6">
+
+            <!-- SECTION 1: ĐỊNH DANH HÀNH CHÍNH -->
+            <div class="glass-panel rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-user-gear text-emerald-400"></i>
+                        Thông tin Định danh & Hành chính
+                    </h3>
+                    <span class="text-[11px] text-slate-400 italic">Theo chuẩn Bộ Giáo dục & Đào tạo</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Họ và tên khai sinh <span class="text-red-400">*</span></label>
+                        <input type="text" id="fullname" value="Trần Gia Bảo" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Số CCCD / Mã định danh cá nhân <span class="text-red-400">*</span></label>
+                        <input type="text" id="nationalId" value="001204015678" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500 font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Mã học sinh (CSDL Ngành) <span class="text-red-400">*</span></label>
+                        <input type="text" id="studentCode" value="NTT-2024-9A2" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-emerald-400 focus:outline-none focus:border-emerald-500 font-mono font-bold">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Ngày tháng năm sinh <span class="text-red-400">*</span></label>
+                        <input type="date" id="dob" value="2011-03-14" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Giới tính</label>
+                        <select id="gender" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                            <option value="Nam" selected>Nam</option>
+                            <option value="Nữ">Nữ</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Dân tộc & Quốc tịch</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input type="text" id="ethnicity" value="Kinh" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                            <input type="text" id="nationality" value="Việt Nam" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2: QUÊ QUÁN & ĐỊA CHỈ NƠI Ở -->
+            <div class="glass-panel rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-cyan-400"></i>
+                        Địa giới Hành chính & Cư trú
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Nơi sinh (Tỉnh/Thành phố)</label>
+                        <input type="text" id="pob" value="TP. Hồ Chí Minh" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Quê quán</label>
+                        <input type="text" id="hometown" value="Phường An Phú, TP. Thủ Đức, TP. Hồ Chí Minh" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label class="block font-semibold text-slate-300 mb-1">Địa chỉ Nơi ở hiện tại / Thường trú</label>
+                        <input type="text" id="currentAddress" value="Số 12 Ngõ 45 Đường Trần Quốc Hoàn, Phường Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: LIÊN HỆ & MEDIA GIỚI THIỆU -->
+            <div class="glass-panel rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-amber-400"></i>
+                        Thông tin Liên hệ & Giới thiệu
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Email cá nhân học sinh</label>
+                        <input type="email" id="email" value="giabao.ntt@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Số điện thoại học sinh</label>
+                        <input type="tel" id="phone" value="0988 123 456" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-emerald-500">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Tải lên Ảnh chân dung 3x4</label>
+                        <input type="file" accept="image/*" class="w-full text-slate-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-500/10 file:text-emerald-400 hover:file:bg-emerald-500/20 cursor-pointer">
+                    </div>
+
+                    <div class="md:col-span-3">
+                        <label class="block font-semibold text-slate-300 mb-1">Slogan / Câu nói tâm đắc</label>
+                        <input type="text" id="slogan" value="Đam mê Khoa học dữ liệu & STEM - Hướng tới Chuyên Tin THPT Chuyên KHTN / Chu Văn An" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-emerald-400 font-medium focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 4: THÔNG TIN PHỤ HUYNH / NGHỆ AN GIÁM HỘ -->
+            <div class="glass-panel rounded-3xl p-6 border border-slate-800 shadow-xl space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                    <h3 class="font-bold text-white text-sm sm:text-base flex items-center gap-2">
+                        <i class="fa-solid fa-users text-purple-400"></i>
+                        Thông tin Cha / Mẹ / Người giám hộ
+                    </h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <!-- Cha -->
+                    <div class="p-4 bg-slate-900/60 rounded-2xl border border-slate-800 space-y-3">
+                        <h4 class="font-bold text-white flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-user-tie text-emerald-400"></i> Thông tin Bố (Cha)
+                        </h4>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Họ tên Bố</label>
+                            <input type="text" id="fatherName" value="Trần Văn Hùng" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-400 mb-1">Số CCCD Bố</label>
+                                <input type="text" id="fatherId" value="001078002931" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Số điện thoại Bố</label>
+                                <input type="tel" id="fatherPhone" value="0912 345 678" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mẹ -->
+                    <div class="p-4 bg-slate-900/60 rounded-2xl border border-slate-800 space-y-3">
+                        <h4 class="font-bold text-white flex items-center gap-2 text-xs">
+                            <i class="fa-solid fa-user-nurse text-rose-400"></i> Thông tin Mẹ
+                        </h4>
+                        <div>
+                            <label class="block text-slate-400 mb-1">Họ tên Mẹ</label>
+                            <input type="text" id="motherName" value="Lê Thị Thanh Mai" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-slate-400 mb-1">Số CCCD Mẹ</label>
+                                <input type="text" id="motherId" value="001182004812" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-emerald-500">
+                            </div>
+                            <div>
+                                <label class="block text-slate-400 mb-1">Số điện thoại Mẹ</label>
+                                <input type="tel" id="motherPhone" value="0903 987 654" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-emerald-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUTTON ACTIONS BAR -->
+            <div class="flex items-center justify-end gap-3 pt-2">
+                <a href="cv.html" class="px-5 py-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">
+                    Hủy bỏ
+                </a>
+                <button type="submit" class="px-6 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk"></i> Lưu Thay Đổi Vào Hồ Sơ
+                </button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center text-xs text-slate-500 py-6 border-t border-slate-800/80">
+        <p>Hộ chiếu Học tập Số (Digital Learning Passport) &bull; Tích hợp CSDL Quốc gia & VNeID</p>
+    </footer>
+
+    <!-- MODAL GIẢ LẬP ĐĂNG NHẬP VNEID -->
+    <div id="vneidModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-red-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-slate-100">
+            <button onclick="closeVneidModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- VNeID Logo Header -->
+            <div class="text-center space-y-2 mb-6">
+                <div class="w-14 h-14 bg-gradient-to-tr from-red-600 to-amber-500 rounded-2xl mx-auto flex items-center justify-center text-white text-3xl font-black shadow-lg">
+                    <i class="fa-solid fa-shield-cat"></i>
+                </div>
+                <h3 class="text-lg font-black text-white">ĐĂNG NHẬP VNeID QUỐC GIA</h3>
+                <p class="text-xs text-slate-300">Xác thực Định danh Điện tử Cấp độ 2 để lấy dữ liệu tự động</p>
+            </div>
+
+            <!-- Simulated QR Code Scan option -->
+            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-center space-y-3 mb-6">
+                <div class="w-36 h-36 bg-white p-2 rounded-xl mx-auto flex items-center justify-center">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=VNEID-AUTHENTICATION-DEMO-STUDENT-TRAN-GIA-BAO" alt="QR VNeID" class="w-full h-full rounded">
+                </div>
+                <p class="text-[11px] text-slate-400">Mở ứng dụng <strong>VNeID</strong> trên điện thoại và quét mã QR để xác thực nhanh</p>
+            </div>
+
+            <!-- Action Demo Buttons -->
+            <div class="space-y-2">
+                <button onclick="processVneidSync()" class="w-full py-3 bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-extrabold text-xs rounded-xl shadow transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-check-circle"></i> Xác thực & Đồng bộ Dữ liệu Ngay
+                </button>
+                <button onclick="closeVneidModal()" class="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs rounded-xl transition">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        function openVneidModal() {
+            document.getElementById('vneidModal').classList.remove('hidden');
+        }
+
+        function closeVneidModal() {
+            document.getElementById('vneidModal').classList.add('hidden');
+        }
+
+        // Tự động điền dữ liệu sau khi xác thực VNeID thành công
+        function processVneidSync() {
+            closeVneidModal();
+
+            // Điền tự động các thông tin chuẩn từ CSDL Quốc Gia
+            document.getElementById('fullname').value = "TRẦN GIA BẢO";
+            document.getElementById('nationalId').value = "001204015678";
+            document.getElementById('dob').value = "2011-03-14";
+            document.getElementById('gender').value = "Nam";
+            document.getElementById('pob').value = "TP. Hồ Chí Minh";
+            document.getElementById('hometown').value = "Phường An Phú, TP. Thủ Đức, TP. Hồ Chí Minh";
+            document.getElementById('currentAddress').value = "Số 12 Ngõ 45 Đường Trần Quốc Hoàn, Phường Dịch Vọng Hậu, Quận Cầu Giấy, Hà Nội";
+            document.getElementById('fatherName').value = "Trần Văn Hùng";
+            document.getElementById('fatherId').value = "001078002931";
+            document.getElementById('fatherPhone').value = "0912 345 678";
+            document.getElementById('motherName').value = "Lê Thị Thanh Mai";
+            document.getElementById('motherId').value = "001182004812";
+            document.getElementById('motherPhone').value = "0903 987 654";
+
+            alert("🎉 Đã xác thực VNeID thành công! Dữ liệu Định danh cá nhân và Phụ huynh đã được đồng bộ chuẩn xác từ Cơ sở Dữ liệu Quốc gia.");
+        }
+
+        function savePersonalData(e) {
+            e.preventDefault();
+            alert("✅ Đã lưu cập nhật thông tin cá nhân vào Hộ chiếu học tập số thành công!");
+            window.location.href = "cv.html";
+        }
+    </script>
+</body>
+</html>

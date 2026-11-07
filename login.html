@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Digital Learning Passport (Hộ chiếu học tập số)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldPassport: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                            950: '#022c22',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.3);
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <!-- Background Decorative Gradients -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 -right-40 w-[30rem] h-[30rem] bg-teal-600/15 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-cyan-600/15 rounded-full blur-3xl"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#059669_1px,transparent_1px)] [background-size:24px_24px] opacity-10"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="relative z-10 flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+        <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-900/90 glow-emerald">
+            
+            <!-- LEFT SECTION: BRANDING & SYSTEM OVERVIEW (7 Cols) -->
+            <div class="lg:col-span-7 bg-gradient-to-br from-emerald-950 via-slate-900 to-slate-950 p-6 sm:p-10 lg:p-12 flex flex-col justify-between relative overflow-hidden border-b lg:border-b-0 lg:border-r border-slate-800/80">
+                
+                <!-- Background Pattern & Crest -->
+                <div class="absolute top-0 right-0 -mr-16 -mt-16 opacity-10 pointer-events-none">
+                    <i class="fa-solid fa-passport text-[22rem] text-emerald-400"></i>
+                </div>
+
+                <!-- Brand Header -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-900/50 text-white text-2xl font-black">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest block">Hệ thống CSDL Giáo dục Quốc gia</span>
+                            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                                HỘ CHIẾU HỌC TẬP SỐ
+                            </h1>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight mb-4">
+                        Minh bạch học tập.<br>
+                        <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Định hình tương lai số.</span>
+                    </h2>
+
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 max-w-xl">
+                        Nền tảng quản lý kết quả học tập, học bạ số và bằng cấp xuyên suốt vòng đời học tập. Tích hợp AI báo cáo chuyên sâu và xác thực chữ ký số dành cho Học sinh, Phụ huynh, Nhà trường và Đơn vị tuyển dụng.
+                    </p>
+
+                    <!-- Core Capabilities Pills -->
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        <span class="glass-panel text-emerald-300 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-check text-emerald-400"></i> Học bạ số Bộ GD&ĐT
+                        </span>
+                        <span class="glass-panel text-cyan-300 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-brain text-cyan-400"></i> AI Đề xuất Kế hoạch
+                        </span>
+                        <span class="glass-panel text-amber-300 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-signature text-amber-400"></i> Xác thực Chữ ký số
+                        </span>
+                        <span class="glass-panel text-purple-300 text-xs font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-globe text-purple-400"></i> Hồ sơ Săn Học bổng
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Interactive Target Users Carousel/Summary Cards -->
+                <div class="space-y-3 my-4">
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">
+                        <span>Đối tượng phục vụ & Phân quyền nghiệp vụ</span>
+                        <button onclick="openSystemInfoModal()" class="text-emerald-400 hover:text-emerald-300 transition flex items-center gap-1 capitalize font-medium">
+                            <i class="fa-solid fa-circle-info"></i> Chi tiết nghiệp vụ
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <div class="glass-panel p-3 rounded-xl border border-slate-800 text-center hover:border-emerald-500/50 transition cursor-default">
+                            <i class="fa-solid fa-user-graduate text-emerald-400 text-lg mb-1 block"></i>
+                            <span class="font-bold text-xs text-white block">Học sinh</span>
+                            <span class="text-[10px] text-slate-400">Xem học bạ & CV</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl border border-slate-800 text-center hover:border-emerald-500/50 transition cursor-default">
+                            <i class="fa-solid fa-users-between-lines text-teal-400 text-lg mb-1 block"></i>
+                            <span class="font-bold text-xs text-white block">Phụ huynh</span>
+                            <span class="text-[10px] text-slate-400">Theo dõi tiến độ</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl border border-slate-800 text-center hover:border-emerald-500/50 transition cursor-default">
+                            <i class="fa-solid fa-school-flag text-cyan-400 text-lg mb-1 block"></i>
+                            <span class="font-bold text-xs text-white block">Đơn vị GD</span>
+                            <span class="text-[10px] text-slate-400">Xác nhận & Kế hoạch</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl border border-slate-800 text-center hover:border-emerald-500/50 transition cursor-default">
+                            <i class="fa-solid fa-briefcase text-purple-400 text-lg mb-1 block"></i>
+                            <span class="font-bold text-xs text-white block">Tuyển dụng</span>
+                            <span class="text-[10px] text-slate-400">Tra cứu & Đối soát</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer System Trust Info -->
+                <div class="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-lock text-emerald-400"></i>
+                        <span>An toàn dữ liệu theo NĐ 13/2023/NĐ-CP</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-slate-400">
+                        <span>Tích hợp VNeID</span>
+                        <span>&bull;</span>
+                        <span>CSDL Bộ GD&ĐT</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT SECTION: MODERN LOGIN FORM & ROLE SELECTOR (5 Cols) -->
+            <div class="lg:col-span-5 bg-slate-900 p-6 sm:p-10 flex flex-col justify-between">
+                
+                <div>
+                    <!-- Form Header -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-bold text-white mb-1">Cổng đăng nhập hệ thống</h3>
+                        <p class="text-xs text-slate-400">Vui lòng chọn đối tượng sử dụng để truy cập đúng phân quyền.</p>
+                    </div>
+
+                    <!-- 4-ROLE SELECTOR TABS -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">Chọn Vai trò đăng nhập:</label>
+                        <div class="grid grid-cols-2 gap-2 p-1 bg-slate-950 rounded-2xl border border-slate-800">
+                            
+                            <!-- Role 1: Học sinh -->
+                            <button type="button" onclick="selectRole('student')" id="role-btn-student" 
+                                class="role-btn active-role flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold bg-emerald-600 text-white shadow-md">
+                                <div class="w-7 h-7 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-user-graduate"></i>
+                                </div>
+                                <div class="truncate">
+                                    <span class="block leading-tight">Học sinh</span>
+                                    <span class="text-[9px] opacity-80 block font-normal truncate">Mã định danh HS</span>
+                                </div>
+                            </button>
+
+                            <!-- Role 2: Phụ huynh -->
+                            <button type="button" onclick="selectRole('parent')" id="role-btn-parent" 
+                                class="role-btn flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+                                <div class="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-300">
+                                    <i class="fa-solid fa-users-between-lines"></i>
+                                </div>
+                                <div class="truncate">
+                                    <span class="block leading-tight">Phụ huynh</span>
+                                    <span class="text-[9px] opacity-70 block font-normal truncate">SĐT / Số CCCD</span>
+                                </div>
+                            </button>
+
+                            <!-- Role 3: Đơn vị giáo dục -->
+                            <button type="button" onclick="selectRole('school')" id="role-btn-school" 
+                                class="role-btn flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+                                <div class="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-300">
+                                    <i class="fa-solid fa-school"></i>
+                                </div>
+                                <div class="truncate">
+                                    <span class="block leading-tight">Nhà trường</span>
+                                    <span class="text-[9px] opacity-70 block font-normal truncate">Tài khoản Ngành</span>
+                                </div>
+                            </button>
+
+                            <!-- Role 4: Đơn vị tuyển dụng -->
+                            <button type="button" onclick="selectRole('recruiter')" id="role-btn-recruiter" 
+                                class="role-btn flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+                                <div class="w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-300">
+                                    <i class="fa-solid fa-building-user"></i>
+                                </div>
+                                <div class="truncate">
+                                    <span class="block leading-tight">Tuyển dụng</span>
+                                    <span class="text-[9px] opacity-70 block font-normal truncate">Email Doanh nghiệp</span>
+                                </div>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <!-- LOGIN FORM -->
+                    <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+                        
+                        <!-- Dynamic Username/ID Field -->
+                        <div>
+                            <label id="input-label-id" class="block text-xs font-medium text-slate-300 mb-1">
+                                Mã định danh học sinh / CCCD <span class="text-emerald-400">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                                    <i id="input-icon-id" class="fa-solid fa-id-card"></i>
+                                </div>
+                                <input type="text" id="username" required 
+                                    placeholder="Nhập mã định danh 12 số hoặc Mã HS..." 
+                                    class="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition">
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <label class="block text-xs font-medium text-slate-300">
+                                    Mật khẩu truy cập <span class="text-emerald-400">*</span>
+                                </label>
+                                <a href="#" onclick="alert('Tính năng khôi phục mật khẩu qua OTP SĐT/Email đã đăng ký.')" class="text-[11px] text-emerald-400 hover:underline">Quên mật khẩu?</a>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                                    <i class="fa-solid fa-lock"></i>
+                                </div>
+                                <input type="password" id="password" required placeholder="••••••••" 
+                                    class="w-full pl-10 pr-10 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition">
+                                <button type="button" onclick="togglePasswordVisibility()" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300">
+                                    <i id="toggle-password-icon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Term checkbox -->
+                        <div class="flex items-center justify-between text-xs text-slate-400 pt-1">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" checked class="rounded border-slate-800 bg-slate-950 text-emerald-600 focus:ring-emerald-500">
+                                <span>Ghi nhớ đăng nhập</span>
+                            </label>
+                            <span class="text-[11px] text-slate-500">Phiên bản v2.4 (2026)</span>
+                        </div>
+
+                        <!-- Primary Submit Button -->
+                        <button type="submit" id="submit-btn" 
+                            class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 rounded-xl text-xs shadow-lg shadow-emerald-950/50 transition flex items-center justify-center gap-2 group">
+                            <span id="submit-btn-text">ĐĂNG NHẬP HỘ CHIẾU HỌC TẬP</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </form>
+
+                    <!-- DIVIDER -->
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
+                        <div class="relative flex justify-center text-[11px] uppercase"><span class="bg-slate-900 px-3 text-slate-500">Hoặc xác thực qua Cổng Định danh</span></div>
+                    </div>
+
+                    <!-- SSO WITH VNeID BUTTON -->
+                    <button type="button" onclick="loginWithVNeID()" 
+                        class="w-full bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-200 font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-2">
+                        <div class="w-5 h-5 rounded-full bg-red-600 text-amber-300 flex items-center justify-center text-[10px] font-black">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <span>Đăng nhập bằng tài khoản Định danh điện tử (VNeID)</span>
+                    </button>
+                </div>
+
+                <!-- Registration / Quick Contact -->
+                <div class="mt-8 text-center text-xs text-slate-500 border-t border-slate-800/60 pt-4">
+                    <span>Chưa có tài khoản Hộ chiếu học tập? </span>
+                    <a href="#" onclick="alert('Vui lòng liên hệ Giáo viên chủ nhiệm hoặc Quản trị viên nhà trường để cấp mã định danh Hộ chiếu học tập.')" class="text-emerald-400 font-semibold hover:underline">Hướng dẫn cấp mới</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SYSTEM INFO MODAL (Explaining business logic for 4 user groups) -->
+    <div id="systemInfoModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative text-slate-200 max-h-[90vh] overflow-y-auto">
+            <button onclick="closeSystemInfoModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg font-bold">
+                    <i class="fa-solid fa-passport"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Nghiệp vụ Hệ thống Hộ chiếu Học tập Số</h3>
+                    <p class="text-xs text-slate-400">Chi tiết phân quyền theo tài liệu Digital Learning Passport</p>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-xs">
+                <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-emerald-400 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-user-graduate"></i> 1. Phân hệ Học sinh (Students)
+                    </h4>
+                    <p class="text-slate-300">Nhập nguyện vọng định hướng cá nhân, sở thích, chứng chỉ ngoại khóa tự phát triển. Xem học bạ số đã xác minh và xem báo cáo phân tích lộ trình học tập do AI đề xuất.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-teal-400 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-users-between-lines"></i> 2. Phân hệ Phụ huynh (Parents)
+                    </h4>
+                    <p class="text-slate-300">Theo dõi tiến độ học tập thực tế của con, nhận thông báo kết quả định kỳ, phê duyệt chia sẻ hồ sơ (Consent) đối với học sinh dưới 16 tuổi khi đăng ký học bổng/chuyển cấp.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-cyan-400 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-school"></i> 3. Phân hệ Đơn vị Giáo dục (Schools & Teachers)
+                    </h4>
+                    <p class="text-slate-300">Nhập điểm số, nhận xét GVCN, thực hiện ký số xác thực học bạ (Hiệu trưởng / GV). Xem báo cáo tổng hợp chất lượng lớp/trường và xây dựng kế hoạch cải thiện giáo dục.</p>
+                </div>
+
+                <div class="p-3.5 bg-slate-950 rounded-2xl border border-slate-800">
+                    <h4 class="font-bold text-purple-400 mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> 4. Phân hệ Đơn vị Tuyển dụng / Đại học (Recruiters)
+                    </h4>
+                    <p class="text-slate-300">Tra cứu tính xác thực của bằng cấp, học bạ qua mã QR hoặc Mã định danh. Xem phân tích báo cáo năng lực ứng viên minh bạch chống gian lận hồ sơ.</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeSystemInfoModal()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition">
+                    Đã hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Store Current Active Role
+        let currentRole = 'student';
+
+        // Role Configurations for UI Dynamic Updates
+        const roleConfigs = {
+            student: {
+                label: 'Mã định danh học sinh / CCCD',
+                placeholder: 'Nhập mã định danh 12 số hoặc Mã HS (VD: 001204005678)...',
+                icon: 'fa-id-card',
+                buttonText: 'ĐĂNG NHẬP VỚI VAI TRÒ HỌC SINH',
+                activeColorClass: 'bg-emerald-600'
+            },
+            parent: {
+                label: 'Số điện thoại Phụ huynh / Số CCCD',
+                placeholder: 'Nhập SĐT đã đăng ký với nhà trường...',
+                icon: 'fa-phone-volume',
+                buttonText: 'ĐĂNG NHẬP VỚI VAI TRÒ PHỤ HUYNH',
+                activeColorClass: 'bg-teal-600'
+            },
+            school: {
+                label: 'Tài khoản Ngành Giáo dục / Mã GV',
+                placeholder: 'Nhập tên đăng nhập tài khoản Ngành (VD: gv_tranvanbinh)...',
+                icon: 'fa-user-shield',
+                buttonText: 'ĐĂNG NHẬP CỔNG GIÁO DỤC / NHÀ TRƯỜNG',
+                activeColorClass: 'bg-cyan-600'
+            },
+            recruiter: {
+                label: 'Email Doanh nghiệp / Mã Tổ chức Tuyển dụng',
+                placeholder: 'Nhập email tổ chức (VD: hr@university.edu.vn)...',
+                icon: 'fa-building',
+                buttonText: 'ĐĂNG NHẬP HỆ THỐNG TUYỂN DỤNG',
+                activeColorClass: 'bg-purple-600'
+            }
+        };
+
+        // Select Role Function
+        function selectRole(roleKey) {
+            currentRole = roleKey;
+            const config = roleConfigs[roleKey];
+
+            // Reset all role buttons styling
+            const roleButtons = document.querySelectorAll('.role-btn');
+            roleButtons.forEach(btn => {
+                btn.className = "role-btn flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800";
+                const iconDiv = btn.querySelector('div');
+                if (iconDiv) iconDiv.className = "w-7 h-7 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 text-slate-300";
+            });
+
+            // Activate selected button
+            const activeBtn = document.getElementById(`role-btn-${roleKey}`);
+            if (activeBtn) {
+                activeBtn.className = `role-btn active-role flex items-center gap-2 p-2.5 rounded-xl text-left transition text-xs font-semibold ${config.activeColorClass} text-white shadow-md`;
+                const activeIconDiv = activeBtn.querySelector('div');
+                if (activeIconDiv) activeIconDiv.className = "w-7 h-7 rounded-lg bg-white/20 flex items-center justify-center shrink-0 text-white";
+            }
+
+            // Update Input Labels & Placeholders
+            document.getElementById('input-label-id').innerHTML = `${config.label} <span class="text-emerald-400">*</span>`;
+            document.getElementById('username').placeholder = config.placeholder;
+            document.getElementById('input-icon-id').className = `fa-solid ${config.icon}`;
+            document.getElementById('submit-btn-text').innerText = config.buttonText;
+        }
+
+        // Toggle Password Visibility
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('password');
+            const icon = document.getElementById('toggle-password-icon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                pwdInput.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        }
+
+        // Handle Form Submission & Redirect to cv.html
+        function handleLoginSubmit(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-btn-text');
+            
+            // Show Loading State
+            submitBtn.disabled = true;
+            submitText.innerText = "ĐANG XÁC THỰC THÔNG TIN...";
+
+            setTimeout(() => {
+                // Redirect directly to cv.html in the same directory
+                window.location.href = 'cv.html';
+            }, 600);
+        }
+
+        // Handle SSO VNeID Login Redirect
+        function loginWithVNeID() {
+            alert('Đang kết nối đến Cổng Định danh điện tử VNeID Quốc gia...');
+            setTimeout(() => {
+                window.location.href = 'cv.html';
+            }, 600);
+        }
+
+        // System Info Modal Controls
+        function openSystemInfoModal() {
+            document.getElementById('systemInfoModal').classList.remove('hidden');
+        }
+
+        function closeSystemInfoModal() {
+            document.getElementById('systemInfoModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
